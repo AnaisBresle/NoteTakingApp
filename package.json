@@ -1,0 +1,24 @@
+{
+  "name": "notetakingapp",
+  "version": "1.0.0",
+  "description": "A simple app to CRUD notes using node.js",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnaisBresle/NoteTakingApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnaisBresle/NoteTakingApp/issues"
+  },
+  "homepage": "https://github.com/AnaisBresle/NoteTakingApp#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
