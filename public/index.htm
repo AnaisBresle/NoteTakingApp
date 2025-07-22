@@ -12,22 +12,29 @@
 </head>
 
 
-<body class="bg-light py-4">
+<body class="bg-light">
+
+    <header class="bg-dark text-white py-3">
+    <div class="container">
+      <h2 class="mb-0">Post-it on the Go</h2>
+      <p class="mb-0 small">Capture your thoughts before they run away</p>
+    </div>
+  </header>
 
 <main class="container">
   <h1 class="mb-4">What's on your mind?</h1>
 
   <!-- Add Note Form -->
-  <section id="addNote" class="mb-4">
+  <section id="addNote" class="card mb-4">
     <div class="card-body">
       <form id="noteForm">
         <div class="mb-3">
           <label for="noteTitle" class="form-label">Title</label>
-          <input type="text" id="noteTitle" required>
+          <input type="text" class="form-control" id="noteTitle" required>
         </div>
         <div class="mb-3">
           <label for="noteContent" class="form-label">Note</label>
-          <textarea id="noteContent" rows="3" required></textarea>
+          <textarea class="form-control" id="noteContent" rows="3" required></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Add Note</button>
       </form>
@@ -37,6 +44,13 @@
   <!-- Notes List -->
   <Section id="notesContainer"></section>
   </main>
+
+    <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3 mt-auto">
+    <div class="container">
+      <small>&copy; 2025 Post-it on the Go. All rights reserved.</small>
+    </div>
+  </footer>
 
 
 
