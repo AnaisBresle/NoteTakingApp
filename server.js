@@ -4,6 +4,18 @@ const app = express();
 const PORT = 3001;
 app.use(express.json());
 
+// Define the path to the JSON file
+const dataFilePath = path.join(__dirname, "data.json");
+
+// Function to read data from the JSON file
+const readData = () => {
+  if (!fs.existsSync(dataFilePath)) {
+    return [];
+  }
+  const data = fs.readFileSync(dataFilePath);
+  return JSON.parse(data);
+};
+
 // Handle GET request at the root route
 app.get("/", (req, res) => {
   res.send("Welcome to the simple Express app!");
