@@ -1,6 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
-  fetchNotes();
-})
+
+//// Element in html file    
+  
+const notesContainer = document.getElementById('notesContainer');
+const titleInput = document.getElementById('noteTitle');
+const messageInput = document.getElementById('noteContent');
+const saveNoteBtn = document.getElementById('saveNoteButton');
+  
+    fetchNotes();
+
+
+
+});
 
 
 function fetchNotes() {
@@ -14,4 +25,12 @@ function fetchNotes() {
     .catch(err => console.error('Error loading notes:', err));
 }
 
-function renderNote () {}
+function renderNote(note, container) {  // build html for one note
+  const noteEl = document.createElement('div');
+  noteEl.classList.add('note');
+  noteEl.innerHTML = `
+    <h3>${note.title}</h3>
+    <p>${note.message}</p>
+    `;
+  container.appendChild(noteEl);
+}
