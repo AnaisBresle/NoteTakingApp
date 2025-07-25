@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
 const titleInput = document.getElementById('noteTitle');
 const messageInput = document.getElementById('noteContent');
 const saveNoteBtn = document.getElementById('saveNoteButton');
-  
+let currentEditId = null; // default null but if edit note clicked then kickin. 
+
     fetchNotes();
 
 saveNoteBtn.addEventListener('click', () => { // in click take input and pass them to server using createNote function
@@ -17,9 +18,15 @@ saveNoteBtn.addEventListener('click', () => { // in click take input and pass th
     alert('Both title and message are required.');
     return;
   }
+if (currentEditId) { /// we are editing a note then run editNote function
+      
+      editNote(currentEditId, { title, message });
+      currentEditId = null;
+      saveNoteBtn.textContent = 'Edit Note'; // Change button text
 
-
-  createNote({ title, message });   // functio to push data to server
+    } else {
+      
+        createNote({ title, message });   // functio to push data to server
 
   // Clear input fields after the data was sucessfully passes 
   titleInput.value = '';
@@ -45,8 +52,8 @@ function renderNote(note) {  // build html for one note
   noteEl.classList.add('note');
   noteEl.innerHTML = `<li>
     <h3>${note.title}</h3> - ${note.message}
-<button data-id="${note.id}" class="edit-btn">Edit</button>
-      <button onclick="deleteNote('${note.id}')">Delete</button>
+     <button onclick="getNoteToEdit('${note.id}')">Edit</button> 
+    <button onclick="deleteNote('${note.id}')">Delete</button>
 </li>
     `;
   notesContainer.appendChild(noteEl);
@@ -90,3 +97,39 @@ if (!confirm("Are you sure you want to delete this note?")) return;
     })
     .catch(err => console.error('Error deleting note:', err));
 }   
+
+function getNoteToEdit (id) {// geting the note to edit 
+  fetch(`/notes/${id}`)
+    .then(res => {
+      if (!res.ok) throw new Error('Note not found');
+      return res.json();
+    })
+    .then(note => {
+      document.getElementById('noteTitle').value = note.title; ///passing the exisitng data to the html page (form)
+      document.getElementById('noteContent').value = note.message;
+      document.getElementById('saveNoteButton').textContent = 'Update Note'; //changing button to update instead of add
+      currentEditId = id;
+    })
+    .catch(err => console.error('Error fetching note for edit:', err));
+}
+
+
+function editNote(id, update) {
+  fetch(`/notes/${id}`, { 
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(update)
+  })
+    .then(res => {
+      if (!res.ok) 
+        throw new Error('Failed to update note');
+      return res.json();
+    })
+    .then(() => {
+      fetchNotes(); // to refresh the list
+    })
+    .catch(err => console.error('Error updating note:', err));
+}   
+
