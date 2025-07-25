@@ -7,5 +7,10 @@
     "id": "29585f5e-ee61-4111-bb9c-be538ba462a9",
     "title": "Postman Tests",
     "message": "testing adding a new note via Postman - POST"
+  },
+  {
+    "id": "f0b64b70-dc25-48d9-b82c-ce1d3d1a75f8",
+    "title": "Postman Tests - Update",
+    "message": "Createing notes to be updated"
   }
 ]
