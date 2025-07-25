@@ -1,8 +1,8 @@
 :root {
-  --color-primary: #15fd0d; 
-  --color-dark-bg: #212529; 
+  --color-primary: #f1549d; 
+  --color-dark-bg: #011d47; 
   --color-light-bg: #f8f9fa; 
-  --color-text-dark: #f7500f;
+  --color-text-dark: #ff0077;
   --color-text-light: #f8f9fa;
   
   --font-main: 'Nunito Sans', sans-serif;
@@ -20,19 +20,21 @@ body {
 header {
   background-color: var(--color-dark-bg);
   color: var(--color-text-light);
-  font-family: var(--font-handwriting);
+  font-family: var(--font-main);
   text-align: center;
 }
 
 header h2 {
   font-weight: 700;
-  font-size: 2rem;
+  font-size: 4rem;
   margin-bottom: 0;
 }
 
 header p {
   font-style: italic;
   font-weight: 300;
+  font-family: var(--font-handwriting);
+  font-size: 2rem;
   margin-top: 0.25rem;
 }
 
@@ -79,6 +81,65 @@ footer {
   margin-right: 0.5rem;
 }
 
+
+
+#saveNoteButton {
+  background-color: var(--color-primary);
+  color: var(--color-text-light);
+  font-size: 1.25rem;
+  padding: 0.5rem 1.5rem;
+  float: right; /* Align right */
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+#saveNoteButton:hover {
+  background-color: #bd045d; 
+  color: var(--color-text-light);
+}
+
+
+/* Buttons inside each note */
+.note-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* Style for individual buttons in note cards */
+.note button {
+  background-color: transparent;
+  border: solid 1px var(--color-text-dark);
+  color: var(--color-text-dark);
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+ }
+
+.note button:hover {
+  background-color: #d43c85;
+  color: var(--color-text-light);
+}
+
+
+.note button.deletebtn {
+  background-color: #e63946; /* strong red */
+  border: none;
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.note button.deletebtn:hover {
+  background-color: #a62834; /* darker red on hover */
+}
 
 
 /* Responsive */

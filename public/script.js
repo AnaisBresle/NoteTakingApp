@@ -54,7 +54,7 @@ function renderNote(note) {  // build html for one note
   noteEl.innerHTML = `
     <h3>${note.title}</h3> - ${note.message}
      <button onclick="getNoteToEdit('${note.id}')">Edit</button> 
-    <button onclick="deleteNote('${note.id}')">Delete</button>
+    <button class="deletebtn" onclick="deleteNote('${note.id}')">Delete</button>
     `;
   notesContainer.appendChild(noteEl);
 }
