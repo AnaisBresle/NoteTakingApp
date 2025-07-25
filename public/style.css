@@ -2,7 +2,7 @@
   --color-primary: #0d6efd; 
   --color-dark-bg: #212529; 
   --color-light-bg: #f8f9fa; 
-  --color-text-dark: #212529;
+  --color-text-dark: #f7500f;
   --color-text-light: #f8f9fa;
   
   --font-main: 'Nunito Sans', sans-serif;
@@ -26,4 +26,44 @@ footer {
   position: fixed;
   bottom: 0;
   width: 100%;
+}
+
+#notesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.note {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  padding: 1rem;
+  width: 100%;
+  max-width: 350px;
+  transition: box-shadow 0.3s ease;
+}
+
+
+.note h3 {
+  margin-top: 0;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.note button {
+  margin-right: 0.5rem;
+}
+
+
+
+/* Responsive */
+@media (max-width: 576px) {
+  #notesContainer {
+    flex-direction: column;
+  }
+  .note {
+    max-width: 100%;
+  }
 }
