@@ -46,7 +46,7 @@ function renderNote(note) {  // build html for one note
   noteEl.innerHTML = `<li>
     <h3>${note.title}</h3> - ${note.message}
 <button data-id="${note.id}" class="edit-btn">Edit</button>
-      <button data-id="${note.id}" class="delete-btn">Delete</button>
+      <button onclick="deleteNote('${note.id}')">Delete</button>
 </li>
     `;
   notesContainer.appendChild(noteEl);
@@ -74,18 +74,19 @@ function renderNote(note) {  // build html for one note
 
 
 function deleteNote(id) {
-  fetch('/notes/${id}', {
+if (!confirm("Are you sure you want to delete this note?")) return;
+
+  fetch(`/notes/${id}`, { /// Note to future-self - need to use  ` and not single quote. 
     method: 'DELETE',
     
   })
     .then(res => {
-      if (!res.ok) {
+      if (!res.ok) 
         throw new Error('Failed to delete note');
-      }
       return res.json();
     })
     .then(() => {
       fetchNotes(); // to refresh the list
     })
-    .catch(err => console.error('Error saving note:', err));
+    .catch(err => console.error('Error deleting note:', err));
 }   
