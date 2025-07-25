@@ -3,9 +3,10 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
+let noteBeingEditedId = null; // Needed for editing    
+
   // Select the AddNote Button + Assign event handler
-  var addNoteButton = document.getElementById("addNoteButton");
-  addNoteButton.onclick = onClickAddNoteButton;
+  document.getElementById("addNoteButton").onclick = onClickAddNoteButton;
 
   // Bring New Note Widget when clicking on Add Note button
 
@@ -18,11 +19,14 @@ document.addEventListener('DOMContentLoaded', function () {
   let NoteBeingEditedId = null; // needed for editable function
 
   // Retrieve  Notes
-  const savedTasks = localStorage.getItem('tasks'); //changing savedTask to plural so it is clear ware saving all the added tasks.
-  if (savedTasks) {
-    const parsedTasks = JSON.parse(savedTasks);
-    parsedTasks.forEach(renderTaskRow); // Looping through the tasks stored and render each one
-  }
+fetch("/notes")
+  .then(response => response.json())
+  .then(notes => {
+    notes.forEach(renderNoteRow);
+  })
+  .catch(error => {
+    console.error("Failed to load notes:", error);
+  });
 
 
   // Capturing the new task
@@ -37,24 +41,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
   ///Adding new tasks ///
 
-  function onClickAddTaskButton() {
-    var taskNameValue = taskName.value.trim();
-    var dueDateValue = dueDate.value;
-    var createdDateValue = new Date().toISOString().split("T")[0]; // convert timestamp into YYYY-MM_DD
+  function onClickAddNoteButton() {
+    const titleValue = noteTitle.value.trim();
+  const messageValue = noteMessage.value.trim();
+if (!titleValue || !messageValue) {
+  alert("Please provide both a title AND a message.");
+  return;
+} // while error already handled at server level - better ux if user get message.
 
-    if (taskNameValue === '') {
-      alert("Please provide a task to be added");
-      return;// stop running further if empty 
-    }
+    const noteData = { // define what's included in a note"
+ title: titleValue,
+    message: messageValue,
 
-    if (dueDateValue === '') {
-      alert("Pleass pick a due date");
-      return;
-    }
+    };
 
-    let tasksArray = JSON.parse(localStorage.getItem('tasks')) || [];
-
-    if (taskBeingEditedId) {
+    if (noteBeingEditedId) {
       tasksArray = tasksArray.map(function (task) {
         if (task.id === taskBeingEditedId) {
           task.taskName = taskNameValue;
