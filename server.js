@@ -65,7 +65,7 @@ app.get("/notes/:id", (req, res) => {
 
 // Update selected Note
 app.put("/notes/:id", (req, res) => {
-  const notes = readData(); 
+  const notes = readNotes(); 
   const index = notes.findIndex((item) => item.id === req.params.id); //going through all the notes and looking for the id that matches
   if (index===-1) {
     return res.status(404).json({ message: "Note not found" });
