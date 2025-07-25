@@ -9,7 +9,22 @@ const saveNoteBtn = document.getElementById('saveNoteButton');
   
     fetchNotes();
 
+saveNoteBtn.addEventListener('click', () => { // in click take input and pass them to server using createNote function
+  const title = titleInput.value.trim();
+  const message = messageInput.value.trim();
 
+  if (!title || !message) {  // UX send an alert (pop-up) to user that both fields are needed. 
+    alert('Both title and message are required.');
+    return;
+  }
+
+
+  createNote({ title, message });   // functio to push data to server
+
+  // Clear input fields after the data was sucessfully passes 
+  titleInput.value = '';
+  messageInput.value = '';
+});
 
 });
 
@@ -32,4 +47,8 @@ function renderNote(note) {  // build html for one note
     <li><h3>${note.title}</h3> - ${note.message}</li>
     `;
   notesContainer.appendChild(noteEl);
+}
+
+function createNote {
+    
 }
