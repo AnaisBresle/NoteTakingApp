@@ -12,6 +12,14 @@ app.use(express.json());
 // Define the path to the JSON file
 const dataFilePath = path.join(__dirname, "notes.json");
 
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, "public")));
+
+// Root route (from clientsode)
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.htm"));
+});
+
 // READ Notes from the JSON file
 const readNotes = () => {
   if (!fs.existsSync(dataFilePath)) {
@@ -26,10 +34,7 @@ const writeNotes = (notes) => {
   fs.writeFileSync(dataFilePath, JSON.stringify(notes, null, 2));
 };
 
-// Root route
-app.get("/", (req, res) => {
-  res.send("Welcome to your Note Taking App!");
-});
+
 
 
 // Get ALL notes
