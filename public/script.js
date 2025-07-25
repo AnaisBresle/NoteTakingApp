@@ -22,7 +22,7 @@ if (currentEditId) { /// we are editing a note then run editNote function
       
       editNote(currentEditId, { title, message });
       currentEditId = null;
-      saveNoteBtn.textContent = 'Edit Note'; // Change button text
+      saveNoteBtn.textContent = 'Save Note'; // Change button text
 
     } else {
       
@@ -31,8 +31,9 @@ if (currentEditId) { /// we are editing a note then run editNote function
   // Clear input fields after the data was sucessfully passes 
   titleInput.value = '';
   messageInput.value = '';
-});
 
+    }
+  });
 });
 
 
@@ -50,11 +51,10 @@ function fetchNotes() {
 function renderNote(note) {  // build html for one note
   const noteEl = document.createElement('div');
   noteEl.classList.add('note');
-  noteEl.innerHTML = `<li>
+  noteEl.innerHTML = `
     <h3>${note.title}</h3> - ${note.message}
      <button onclick="getNoteToEdit('${note.id}')">Edit</button> 
     <button onclick="deleteNote('${note.id}')">Delete</button>
-</li>
     `;
   notesContainer.appendChild(noteEl);
 }
