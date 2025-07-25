@@ -1,0 +1,29 @@
+:root {
+  --color-primary: #0d6efd; 
+  --color-dark-bg: #212529; 
+  --color-light-bg: #f8f9fa; 
+  --color-text-dark: #212529;
+  --color-text-light: #f8f9fa;
+  
+  --font-main: 'Nunito Sans', sans-serif;
+  --font-handwriting: 'Rouge Script', cursive;
+}
+
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-light-bg);
+  color: var(--color-text-dark);
+  margin-bottom: 3rem; /* For footer spacing */
+}
+
+
+
+footer {
+  background-color: var(--color-dark-bg);
+  color: var(--color-text-light);
+  font-size: 0.875rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
