@@ -10,7 +10,7 @@ const PORT = 3001;
 app.use(express.json());
 
 // Define the path to the JSON file
-const dataFilePath = path.join(__dirname, "note.json");
+const dataFilePath = path.join(__dirname, "notes.json");
 
 // READ data from the JSON file
 const readNotes = () => {
@@ -46,22 +46,19 @@ const { title, message } = req.body; //defining fields that make a Note
   if (!title || !message) { // Alerting user that both Title and message are mandatory (if any is blank message fired)
     return res.status(400).json({ message: "Title and message are required" });
   }
-
-
-
-  const newData = { id: uuidv4(), ...req.body };
-  const currentData = readData();
-  currentData.push(newData);
-  writeData(currentData);
-  res.json({ message: "Data saved successfully", data: newData });
+  const newNote = { id: uuidv4(), ...req.body }; // assign a unique id on creation. 
+  const currentNotes = readNotes(); // read exisiting notes 
+  currentNotes.push(newNote); // add newNotes to current ones
+  writeData(currentNotes);
+  res.json({ message: "Data saved successfully", data: newNote }); // sucess message + the note added
 });
 
 // Get Specific Note using ID
 app.get("/data/:id", (req, res) => {
-  const data = readData();
-  const item = data.find((item) => item.id === req.params.id);
+  const notes = readNotes(); // read all notes
+  const item = notes.find((item) => item.id === req.params.id); // find the corresponding id
   if (!item) {
-    return res.status(404).json({ message: "Data not found" });
+    return res.status(404).json({ message: "Note not found" }); // if ID not found in all notes then error message
   }
   res.json(item);
 });
