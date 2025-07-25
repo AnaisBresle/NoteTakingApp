@@ -49,7 +49,7 @@ const { title, message } = req.body; //defining fields that make a Note
   const newNote = { id: uuidv4(), ...req.body }; // assign a unique id on creation. 
   const currentNotes = readNotes(); // read exisiting notes 
   currentNotes.push(newNote); // add newNotes to current ones
-  writeData(currentNotes);
+  writeNotes(currentNotes);
   res.json({ message: "Data saved successfully", data: newNote }); // sucess message + the note added
 });
 
