@@ -12,10 +12,5 @@
     "id": "f0b64b70-dc25-48d9-b82c-ce1d3d1a75f8",
     "title": "Postman Tests - Update via PUT",
     "message": "Updated title and message. "
-  },
-  {
-    "id": "f2632181-1ded-445a-a2be-7591928831ab",
-    "title": "Postman Tests - New note to be deleted",
-    "message": "Will be deleted "
   }
 ]
