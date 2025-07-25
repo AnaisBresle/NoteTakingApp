@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //// Element in html file    
   
-const notesContainer = document.getElementById('notesContainer');
+
 const titleInput = document.getElementById('noteTitle');
 const messageInput = document.getElementById('noteContent');
 const saveNoteBtn = document.getElementById('saveNoteButton');
@@ -33,7 +33,7 @@ function fetchNotes() {
   fetch('/notes') /// GET reuqest 
     .then(res => res.json()) // notes in JSON format
     .then(data => {
-      const notesContainer = document.getElementById('notesContainer'); /// place where we are displaying all existig notes. 
+      const notesContainer = document.getElementById('notesContainer'); 
       notesContainer.innerHTML = ''; // clear existing view in container (so it gets replaced by the updated list of all notes)
       data.forEach(renderNote); // rendering notes for HMTL
     })
@@ -44,11 +44,27 @@ function renderNote(note) {  // build html for one note
   const noteEl = document.createElement('div');
   noteEl.classList.add('note');
   noteEl.innerHTML = `
-    <li><h3>${note.title}</h3> - ${note.message}</li>
+    <h3>${note.title}</h3> - ${note.message}
     `;
   notesContainer.appendChild(noteEl);
 }
 
-function createNote {
-    
-}
+ function createNote(note) {
+  fetch('/notes', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(note)
+  })
+    .then(res => {
+      if (!res.ok) {
+        throw new Error('Failed to save note');
+      }
+      return res.json();
+    })
+    .then(data => {
+      renderNote(data.data); // Immediately add new note to view
+    })
+    .catch(err => console.error('Error saving note:', err));
+}   
