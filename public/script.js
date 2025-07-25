@@ -3,31 +3,21 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
-  // Set Created date to today's in YYYY-MM-DD format
-  //document.querySelector('.set-today').value=(new Date()).toISOString().substr(0,10); Changed as capture in Task function. 
+  // Select the AddNote Button + Assign event handler
+  var addNoteButton = document.getElementById("addNoteButton");
+  addNoteButton.onclick = onClickAddNoteButton;
 
-  // Select the New inputs for a new task. 
-  var taskName = document.getElementById("taskName");
-  var dueDate = document.getElementById("dueDate");
-  var taskStatus = document.getElementById("taskStatus");
-  var statusWrapper = document.getElementById("taskStatusWrapper");
-  //var createdDate = document.getElementById("createdDate")
+  // Bring New Note Widget when clicking on Add Note button
 
-  // Select the addTask Button + Assign event handler
-  var addTaskButton = document.getElementById("addTaskButton");
-  addTaskButton.onclick = onClickAddTaskButton;
-
-  // Bring New Task Widget when clicking on Add Task button
-
-  document.querySelector('.addTask').onclick = function () {
-    console.log('Add Task button clicked!');
-    document.querySelector('.newTaskWidget').style.display = 'block';
+  document.querySelector('.addNote').onclick = function () {
+    console.log('Add Note button clicked!');
+    document.querySelector('.newNoteWidget').style.display = 'block';
 
   };
 
-  let taskBeingEditedId = null; // needed for editable function
+  let NoteBeingEditedId = null; // needed for editable function
 
-  // Retrieve saved tasks from localStorage on load - Needs to be before onClickAddTaskButton function
+  // Retrieve  Notes
   const savedTasks = localStorage.getItem('tasks'); //changing savedTask to plural so it is clear ware saving all the added tasks.
   if (savedTasks) {
     const parsedTasks = JSON.parse(savedTasks);
@@ -39,12 +29,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Create new task object test
 
-  function Task(task_Name, due_Date, created_Date, status = "Not Started") {
-    this.id = crypto.randomUUID(); // creating ramdom id so can delete correcct task
-    this.taskName = task_Name;
-    this.dueDate = due_Date;
-    this.createdDate = created_Date;
-    this.status = status; //default value set to Not started on creation. 
+  function Task(task_Name, ) {
+       this.taskName = task_Name;
+       
   }
 
 
@@ -64,12 +51,6 @@ document.addEventListener('DOMContentLoaded', function () {
       alert("Pleass pick a due date");
       return;
     }
-
-    //if (createdDateValue ===''){
-    // alert ("Pleass pick a date when task was created");
-    // return;
-    //}
-    //console.log(taskNameValue, dueDateValue, createdDateValue); 
 
     let tasksArray = JSON.parse(localStorage.getItem('tasks')) || [];
 
