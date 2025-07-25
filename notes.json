@@ -1,8 +1,11 @@
 [
-
-{
-  "title": "Meeting Notes",
-  "message": "Discussed project timelines and assigned tasks."
-}
-
+  {
+    "title": "Meeting Notes",
+    "message": "Discussed project timelines and assigned tasks."
+  },
+  {
+    "id": "29585f5e-ee61-4111-bb9c-be538ba462a9",
+    "title": "Postman Tests",
+    "message": "testing adding a new note via Postman - POST"
+  }
 ]
