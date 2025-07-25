@@ -25,12 +25,12 @@ function fetchNotes() {
     .catch(err => console.error('Error loading notes:', err));
 }
 
-function renderNote(note, container) {  // build html for one note
+function renderNote(note) {  // build html for one note
   const noteEl = document.createElement('div');
   noteEl.classList.add('note');
   noteEl.innerHTML = `
     <h3>${note.title}</h3>
     <p>${note.message}</p>
     `;
-  container.appendChild(noteEl);
+  notesContainer.appendChild(noteEl);
 }
