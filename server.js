@@ -12,7 +12,7 @@ app.use(express.json());
 // Define the path to the JSON file
 const dataFilePath = path.join(__dirname, "notes.json");
 
-// READ data from the JSON file
+// READ Notes from the JSON file
 const readNotes = () => {
   if (!fs.existsSync(dataFilePath)) {
     return [];
@@ -21,7 +21,7 @@ const readNotes = () => {
   return JSON.parse(data);
 };
 
-// WRITE data to the JSON file
+// WRITE Notes to the JSON file
 const writeNotes = (notes) => {
   fs.writeFileSync(dataFilePath, JSON.stringify(notes, null, 2));
 };
@@ -50,7 +50,7 @@ const { title, message } = req.body; //defining fields that make a Note
   const currentNotes = readNotes(); // read exisiting notes 
   currentNotes.push(newNote); // add newNotes to current ones
   writeNotes(currentNotes);
-  res.json({ message: "Data saved successfully", data: newNote }); // sucess message + the note added
+  res.json({ message: "Note saved successfully", data: newNote }); // sucess message + the note added
 });
 
 // Get Specific Note using ID
@@ -75,7 +75,7 @@ app.put("/notes/:id", (req, res) => {
   notes[index] = {...notes[index], ...req.body }; 
   
   writeNotes(notes), // saved updated note
-  res.json({ message: "Note Updated successfully", data: data[index] });
+  res.json({ message: "Note Updated successfully", data: notes[index] });
 });
 
 
@@ -84,7 +84,7 @@ app.delete("/notes/:id", (req, res) => {
   const notes = readNotes();
   const index = notes.findIndex((item) => item.id === req.params.id); //finding which item/note (index in array) to delete. 
   if (index===-1) {
-    return res.status(404).json({ message: "Data not found" });
+    return res.status(404).json({ message: "Note not found" });
   }
 
 /// remove the item from array
