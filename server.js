@@ -54,7 +54,7 @@ const { title, message } = req.body; //defining fields that make a Note
 });
 
 // Get Specific Note using ID
-app.get("/data/:id", (req, res) => {
+app.get("/notes/:id", (req, res) => {
   const notes = readNotes(); // read all notes
   const item = notes.find((item) => item.id === req.params.id); // find the corresponding id
   if (!item) {
@@ -64,33 +64,33 @@ app.get("/data/:id", (req, res) => {
 });
 
 // Update selected Note
-app.put("/data/:id", (req, res) => {
-  const data = readData(); // read latest data in
-  const index = data.findIndex((item) => item.id === req.params.id); //going through all the data and looking for the id that matches
+app.put("/notes/:id", (req, res) => {
+  const notes = readData(); 
+  const index = notes.findIndex((item) => item.id === req.params.id); //going through all the notes and looking for the id that matches
   if (index===-1) {
-    return res.status(404).json({ message: "Data not found" });
+    return res.status(404).json({ message: "Note not found" });
   }
 
-/// Adding new data to the existing indexed item using spread operator
-  data[index] = {...data[index], ...req.body }; 
+/// Merge new data into existing note
+  notes[index] = {...notes[index], ...req.body }; 
   
-  writeData(data),
-  res.json({ message: "Data Updated successfully", data: data[index] });
+  writeNotes(notes), // saved updated note
+  res.json({ message: "Note Updated successfully", data: data[index] });
 });
 
 
 // DELETE Specific Note
-app.delete("/data/:id", (req, res) => {
-  const data = readData();
-  const index = data.findIndex((item) => item.id === req.params.id); //finding which item (index in array) to delete. 
+app.delete("/notes/:id", (req, res) => {
+  const notes = readNotes();
+  const index = notes.findIndex((item) => item.id === req.params.id); //finding which item/note (index in array) to delete. 
   if (index===-1) {
     return res.status(404).json({ message: "Data not found" });
   }
 
 /// remove the item from array
-  data.splice(index,1)
-  writeData(data);
-  res.json({ message: "Data Deleted successfully" });
+  notes.splice(index,1)
+  writeNotes(notes);
+  res.json({ message: "Note successfully deleted" });
 });
 
 
