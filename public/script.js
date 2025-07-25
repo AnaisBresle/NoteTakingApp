@@ -71,3 +71,21 @@ function renderNote(note) {  // build html for one note
     })
     .catch(err => console.error('Error saving note:', err));
 }   
+
+
+function deleteNote(id) {
+  fetch('/notes/${id}', {
+    method: 'DELETE',
+    
+  })
+    .then(res => {
+      if (!res.ok) {
+        throw new Error('Failed to delete note');
+      }
+      return res.json();
+    })
+    .then(() => {
+      fetchNotes(); // to refresh the list
+    })
+    .catch(err => console.error('Error saving note:', err));
+}   
