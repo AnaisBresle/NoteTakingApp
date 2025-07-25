@@ -1,5 +1,5 @@
 :root {
-  --color-primary: #0d6efd; 
+  --color-primary: #15fd0d; 
   --color-dark-bg: #212529; 
   --color-light-bg: #f8f9fa; 
   --color-text-dark: #f7500f;
@@ -12,11 +12,34 @@
 
 body {
   font-family: var(--font-main);
-  background-color: var(--color-light-bg);
-  color: var(--color-text-dark);
+  background-color: var(--color-dark-bg) !important;
+  color: var(--color-text-light) !important;
   margin-bottom: 3rem; /* For footer spacing */
 }
 
+header {
+  background-color: var(--color-dark-bg);
+  color: var(--color-text-light);
+  font-family: var(--font-handwriting);
+  text-align: center;
+}
+
+header h2 {
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 0;
+}
+
+header p {
+  font-style: italic;
+  font-weight: 300;
+  margin-top: 0.25rem;
+}
+
+main h1 {
+  font-weight: 600;
+  color: var(--color-primary);
+}
 
 
 footer {

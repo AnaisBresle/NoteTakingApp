@@ -17,5 +17,10 @@
     "id": "7e63cdf2-29b0-4479-81d0-ed72944ff0fe",
     "title": "Postman Tests - Update via PUT",
     "message": "Updated title and message. Testing in client"
+  },
+  {
+    "id": "a9c4651b-3575-40db-bd7d-98ef6358fcba",
+    "title": "this is a test on the client side",
+    "message": "ttt"
   }
 ]
