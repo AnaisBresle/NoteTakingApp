@@ -29,8 +29,7 @@ function renderNote(note) {  // build html for one note
   const noteEl = document.createElement('div');
   noteEl.classList.add('note');
   noteEl.innerHTML = `
-    <h3>${note.title}</h3>
-    <p>${note.message}</p>
+    <li><h3>${note.title}</h3> - ${note.message}</li>
     `;
   notesContainer.appendChild(noteEl);
 }
