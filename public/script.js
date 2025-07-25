@@ -52,7 +52,8 @@ function renderNote(note) {  // build html for one note
   const noteEl = document.createElement('div');
   noteEl.classList.add('note');
   noteEl.innerHTML = `
-    <h3>${note.title}</h3> - ${note.message}
+    <h3>${note.title}</h3>
+    <p>${note.message}</p>
      <button onclick="getNoteToEdit('${note.id}')">Edit</button> 
     <button class="deletebtn" onclick="deleteNote('${note.id}')">Delete</button>
     `;
