@@ -1,6 +1,6 @@
 :root {
   --color-primary: #f1549d; 
-  --color-dark-bg: #011d47; 
+  --color-dark-bg: #1e1e1f; 
   --color-light-bg: #f8f9fa; 
   --color-text-dark: #ff0077;
   --color-text-light: #f8f9fa;
@@ -40,13 +40,12 @@ header p {
 
 main h1 {
   font-weight: 600;
-  color: var(--color-primary);
+  color: var(--color-text-light);
 }
 
 
 footer {
-  background-color: var(--color-dark-bg);
-  color: var(--color-text-light);
+  color: var(--color-text-dark);
   font-size: 0.875rem;
   position: fixed;
   bottom: 0;
@@ -59,7 +58,7 @@ footer {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-bottom: 3rem;
+  margin-bottom: 5rem;
 }
 
 .note {
@@ -69,9 +68,17 @@ footer {
   padding: 1rem;
   width: 100%;
   max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* push buttons to bottom */
+  height: 250px; /* fixed height for all cards */
   transition: box-shadow 0.3s ease;
-}
+  }
 
+
+.note-content { /* Content wrapper inside note */
+  flex-grow: 1;
+}
 
 .note h3 {
   margin-top: 0;
@@ -81,13 +88,22 @@ footer {
 }
 
 .note p {
-  margin: 0.5rem 0 0 0;
+  margin: 0.5rem 0;
   color: #333;
-  font-size: 1rem;
+  font-size: 1.7rem;
   white-space: pre-wrap; /* preserve line breaks */
+  font-family: var(--font-handwriting);
 }
 
 /* Style for individual buttons in note cards */
+.note-buttons { /* container to keep button at bottom */
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+
 .note button {
   background-color: transparent;
   border: solid 1px var(--color-text-dark);
